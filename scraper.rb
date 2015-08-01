@@ -6,6 +6,5 @@ require 'wikidata/fetcher'
 
 WikiData::Category.new('Category:UK MPs 2015–20').wikidata_ids.each do |id|
   data = WikiData::Fetcher.new(id: id).data or next
-  puts data
   ScraperWiki.save_sqlite([:id], data)
 end
