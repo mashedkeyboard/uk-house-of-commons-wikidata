@@ -1,11 +1,4 @@
 GIT
-  remote: git@github.com:openc/sqlite_magic.git
-  revision: 4df975eb4e9891de54f870077c83f63762af9bf9
-  specs:
-    sqlite_magic (0.0.6)
-      sqlite3
-
-GIT
   remote: https://github.com/everypolitician/wikidata-fetcher.git
   revision: 127c04959bcc10d81cdb85a2af6d23c1e249aec3
   specs:
@@ -23,6 +16,13 @@ GIT
     scraperwiki (3.0.1)
       httpclient
       sqlite_magic
+
+GIT
+  remote: https://github.com/openc/sqlite_magic.git
+  revision: 4df975eb4e9891de54f870077c83f63762af9bf9
+  specs:
+    sqlite_magic (0.0.6)
+      sqlite3
 
 GEM
   remote: https://rubygems.org/
