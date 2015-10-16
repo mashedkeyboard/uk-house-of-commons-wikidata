@@ -19,6 +19,9 @@ end
 claims = { 
   56 => '463:21084473',
   55 => '463:21084472',
+  54 => '463:21084471',
+  53 => '463:21084470',
+  52 => '463:21084469',
 }
 
 wd_ids = claims.map { |term, claim| ids_from_claim(claim) }.reduce(&:+).uniq
