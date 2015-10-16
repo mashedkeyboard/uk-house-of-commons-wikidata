@@ -16,7 +16,12 @@ def ids_from_claim(claim_str)
   json[:items].map { |id| "Q#{id}" }
 end
 
-wd_ids = ids_from_claim('463:21084473')
+claims = { 
+  56 => '463:21084473',
+  55 => '463:21084472',
+}
+
+wd_ids = claims.map { |term, claim| ids_from_claim(claim) }.reduce(&:+).uniq
 
 wd_ids.each do |id|
   data = WikiData::Fetcher.new(id: id).data or next
