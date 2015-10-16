@@ -22,8 +22,10 @@ claims = {
 }
 
 wd_ids = claims.map { |term, claim| ids_from_claim(claim) }.reduce(&:+).uniq
+warn "#{wd_ids.count} to fetch"
 
-wd_ids.each do |id|
+wd_ids.each_with_index do |id, i|
+  warn i if (i % 20).zero?
   data = WikiData::Fetcher.new(id: id).data or next
   ScraperWiki.save_sqlite([:id], data)
 end
