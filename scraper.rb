@@ -20,5 +20,5 @@ terms = {
 claim = terms.values.map { |t| "claim[463:%d]" % t.sub('Q','').to_i }.join(' OR ')
 ids = EveryPolitician::Wikidata.wdq(claim)
 ids.each_slice(100) do |sliced|
-  EveryPolitician::Wikidata.scrape_wikidata(ids: sliced, output: true)
+  EveryPolitician::Wikidata.scrape_wikidata(ids: sliced, output: false)
 end
