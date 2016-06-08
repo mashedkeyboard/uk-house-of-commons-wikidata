@@ -20,4 +20,4 @@ terms = {
 claim = terms.values.map { |t| "claim[463:%d]" % t.sub('Q','').to_i }.join(' OR ')
 ids = EveryPolitician::Wikidata.wdq(claim)
 warn "To fetch: #{ids.count}"
-EveryPolitician::Wikidata.scrape_wikidata(ids: ids, batch_size: 100, output: false)
+EveryPolitician::Wikidata.scrape_wikidata(ids: ids, batch_size: 50, output: false)
