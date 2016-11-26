@@ -17,7 +17,8 @@ terms = {
   # 46 => '21084463',
 }
 
-claim = terms.values.map { |t| "claim[463:%d]" % t.sub('Q','').to_i }.join(' OR ')
-ids = EveryPolitician::Wikidata.wdq(claim)
+sparq = 'SELECT ?item WHERE { ?item wdt:P463 wd:Q%s . }'
+ids = terms.values.map { |t| EveryPolitician::Wikidata.sparql(sparq % t) }.reduce(:|)
 warn "To fetch: #{ids.count}"
+
 EveryPolitician::Wikidata.scrape_wikidata(ids: ids, batch_size: 50, output: false)
