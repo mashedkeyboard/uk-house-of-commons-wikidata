@@ -21,5 +21,9 @@ gem 'sqlite_magic', github: 'openc/sqlite_magic'
 
 gem 'everypolitician', github: 'everypolitician/everypolitician-ruby'
 gem 'wikidata-fetcher', '>=0.19.0', github: 'everypolitician/wikidata-fetcher'
-gem 'wikisnakker', github: 'everypolitician/wikisnakker', branch: 'yajl'
+gem 'wikisnakker', github: 'everypolitician/wikisnakker'
+
+group :quality do
+  gem 'rubocop'
+end
 
