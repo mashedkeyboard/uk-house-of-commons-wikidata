@@ -4,31 +4,29 @@
 require 'wikidata/fetcher'
 
 terms = {
-  57 => '29974940',
-  56 => '21084473',
-  55 => '21084472',
-  54 => '21084471',
-  53 => '21084470',
-  52 => '21084469',
+  57 => 'Q29974940',
+  56 => 'Q21084473',
+  55 => 'Q21084472',
+  54 => 'Q21084471',
+  53 => 'Q21084470',
+  52 => 'Q21084469'
 }
 
-# TODO: make this a single query that includes all the terms we care about
-qual_sparq = <<EOQ
-  SELECT ?item
-  WHERE {
-    ?item p:P39 ?position_statement .
-    ?position_statement ps:P39 wd:Q16707842 ;
-                        pq:P2937 wd:Q%s .
-  }
-EOQ
+values = terms.values.map { |id| "wd:#{id}" }.join ' '
 
 # People with a position 'UK MP', with 'legislative period: @term' qualifier
-qual_ids = terms.values.map { |t| EveryPolitician::Wikidata.sparql(qual_sparq % t) }.reduce(:|)
+qual_sparq = <<EOQ
+  SELECT ?item WHERE {
+    ?item p:P39 ?position_statement .
+    VALUES ?term { %s }
+    ?position_statement ps:P39 wd:Q16707842 ; pq:P2937 ?term
+  }
+EOQ
+qual_ids = EveryPolitician::Wikidata.sparql(qual_sparq % values)
 
 # People with a 'member of: @term'
-term_sparq = 'SELECT ?item WHERE { ?item wdt:P463 wd:Q%s . }'
-term_ids = terms.values.map { |t| EveryPolitician::Wikidata.sparql(term_sparq % t) }.reduce(:|)
-
+term_sparq = 'SELECT ?item WHERE { VALUES ?term { %s } ?item wdt:P463 ?term }'
+term_ids = EveryPolitician::Wikidata.sparql(term_sparq % values)
 
 ids = qual_ids | term_ids
 warn "To fetch: #{ids.count}"
