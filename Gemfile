@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # It's easy to add more libraries or choose different versions. Any libraries
 # specified here will be installed and made available to your morph.io scraper.
 # Find out more: https://morph.io/documentation/ruby
@@ -21,7 +20,7 @@ gem 'rest-client'
 gem 'scraperwiki', github: 'openaustralia/scraperwiki-ruby',
                    branch: 'morph_defaults'
 gem 'sqlite_magic', github: 'openc/sqlite_magic'
-gem 'wikidata-fetcher', '>=0.20.2', github: 'everypolitician/wikidata-fetcher'
+gem 'wikidata-fetcher', '>=0.21', github: 'everypolitician/wikidata-fetcher'
 gem 'wikisnakker', github: 'everypolitician/wikisnakker'
 
 group :quality do
