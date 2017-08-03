@@ -21,7 +21,7 @@ memberships = membership_ids.values.map { |id| "wd:#{id}" }.join ' '
 
 # People with a position 'UK MP', with 'legislative period: @term' qualifier
 qual_sparq = <<EOQ
-  SELECT ?item WHERE {
+  SELECT DISTINCT ?item WHERE {
     ?item p:P39 ?position_statement .
     VALUES ?term { %s }
     ?position_statement ps:P39 wd:Q16707842 ; pq:P2937 ?term
@@ -30,11 +30,11 @@ EOQ
 qual_ids = EveryPolitician::Wikidata.sparql(qual_sparq % terms)
 
 # People with a 'member of: @term'
-term_sparq = 'SELECT ?item WHERE { VALUES ?term { %s } ?item wdt:P463 ?term }'
+term_sparq = 'SELECT DISTINCT ?item WHERE { VALUES ?term { %s } ?item wdt:P463 ?term }'
 term_ids = EveryPolitician::Wikidata.sparql(term_sparq % terms)
 
 # People with a P39 of a Term-specific membership
-term_mem_sparq = 'SELECT ?item WHERE { VALUES ?term { %s } ?item wdt:P39 ?term }'
+term_mem_sparq = 'SELECT DISTINCT ?item WHERE { VALUES ?term { %s } ?item wdt:P39 ?term }'
 term_mem_ids = EveryPolitician::Wikidata.sparql(term_mem_sparq % memberships)
 
 ids = qual_ids | term_ids | term_mem_ids
