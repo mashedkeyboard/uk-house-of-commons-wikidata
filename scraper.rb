@@ -13,4 +13,4 @@ qual_sparq = <<EOQ
 EOQ
 qual_ids = EveryPolitician::Wikidata.sparql(qual_sparq)
 
-EveryPolitician::Wikidata.scrape_wikidata(ids: qual_ids, batch_size: 50)
+EveryPolitician::Wikidata.scrape_wikidata(ids: qual_ids, batch_size: 25)
